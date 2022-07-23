@@ -1,0 +1,85 @@
+// .bg-img-svg(@img) { background-image:url("../../../infra/assets/svg/@{img}.svg"); }
+// @import "../../../infra/styles/fonts/jost.less";
+// @import "../../../infra/styles/reset-btn.less";
+
+
+
+
+.app {
+    width : 100%;
+    height: 100%;
+
+    .form {
+        .lang {
+            left: 50px;
+            position: absolute;
+           
+        }
+
+        .header {
+            font-size     : 30px;
+            padding-bottom: 20px;
+
+            // .date {
+            //     position : absolute;
+            //     left     : 10px;
+            //     font-size: 14px;
+            //     top      : 20px;
+            // }
+        }
+
+        display         : flex;
+        align-items     : center;
+        flex-direction  : column;
+        background-color: rgb(217, 245, 249);
+
+        .input-wrap {
+            width: 400px;
+            
+            .q-row {
+                display        : flex;
+                justify-content: space-between;
+                padding-bottom : 10px;
+                font-size      : 18px;
+                
+                .title-desc {
+                    .title {
+                        padding-bottom: 5px;
+                    }
+                    .desc {
+                        font-size: 14px;
+                    }
+                }
+
+                input {
+                    font-size: 14px;
+                    height: 20px;
+                    outline: none;
+                }
+            }
+
+            &.heb {
+                .q-row {
+                    flex-direction: row-reverse;
+                    
+                    .title-desc {
+                        text-align: right;
+
+                    }
+                     
+                    input {
+                        text-align: right;
+                        direction : rtl;
+                    }
+                }
+            }
+        }
+        .submit .submit-btn {
+            font-size: 18px;
+        }
+    }
+}
+
+button {
+    font-size: 14px;
+}
