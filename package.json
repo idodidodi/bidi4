@@ -1,7 +1,7 @@
 {
-  "name": "Registration",
+  "name": "offline registration form",
   "version": "1.0.0",
-  "description": "offline Registration",
+  "description": "for advas studio",
   "main": "./dist/main.bundle.js",
   "scripts": {
     "start": "electron ./dist/main.bundle.js",
