@@ -47,10 +47,10 @@
   "author": "Ido",
   "license": "MIT",
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "classnames": "2.3.1",
     "csv-writer": "^1.6.0",
-    "classnames": "2.3.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",
@@ -70,10 +70,10 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^28.1.3",
-    "ts-jest": "^28.0.7",
-    "typescript": "^4.7.4",
     "less": "^3.10.3",
-    "less-loader": "^10.2.0"
+    "less-loader": "^10.2.0",
+    "ts-jest": "^28.0.7",
+    "typescript": "^4.7.4"
   },
   "optionalDependencies": {
     "copy-webpack-plugin": "^11.0.0",
