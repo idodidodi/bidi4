@@ -1,6 +1,6 @@
 {
-  "name": "Group Sitting Registration Form",
-  "version": "4.0.0",
+  "name": "Registration",
+  "version": "1.0.0",
   "description": "offline Registration",
   "main": "./dist/main.bundle.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "build:mac": "electron-builder build --mac"
   },
   "build": {
-    "appId": "com.devtography.electron_boilerplate",
-    "productName": "Electron+React+TypeScript Boilerplate",
+    "appId": "bidi1",
+    "productName": "Group Sitting Offline Registration Form",
     "directories": {
       "app": "./dist/",
       "output": "./out/"
@@ -26,7 +26,7 @@
     "mac": {
       "target": {
         "target": "dmg",
-        "arch": "universal"
+        "arch": "x64"
       }
     },
     "win": {
