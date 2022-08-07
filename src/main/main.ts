@@ -57,7 +57,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-ipcMain.on('exportToCsv', (_: any, data:RegForm) => {
+ipcMain.on('exportToCsv', (_, data: RegForm) => {
   writeToCSV(data);
 });
 

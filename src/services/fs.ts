@@ -3,6 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-underscore-dangle */
 import * as fs from 'fs';
+import os from 'os';
+import { join } from 'path';
 
 import { createObjectCsvWriter } from 'csv-writer';
 import { CsvWriter } from 'csv-writer/src/lib/csv-writer';
@@ -11,6 +13,7 @@ import { RegForm } from '../models';
 
 const GS_REGISTRATION_FILE_PREFIX = 'gs-registration';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let csvWriter: CsvWriter<ObjectMap<any>>;
 
 export enum OsTypes {
@@ -117,6 +120,8 @@ function writeLog(data: string) {
 
 export function writeToCSV(list: RegForm) {
   if (!csvWriter) {
+    const hd:string = os.homedir();
+    initDirectory(join(hd, csvDir));
     initDirectory(csvDir);
     createCsvWrite(getFileName());
   }
@@ -124,9 +129,12 @@ export function writeToCSV(list: RegForm) {
   csvWriter
     .writeRecords([list])
     .then(() => {
+      // eslint-disable-next-line no-console
       console.log('The CSV file was written successfully');
     })
     .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       writeLog(err);
       // eslint-disable-next-line no-alert

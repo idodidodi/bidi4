@@ -1,7 +1,7 @@
 {
-  "name": "offline_registration_form",
-  "version": "4.0.0",
-  "description": "offline Registration",
+  "name": "offline registration form",
+  "version": "1.0.0",
+  "description": "for advas studio",
   "main": "./dist/main.bundle.js",
   "scripts": {
     "start": "electron ./dist/main.bundle.js",
@@ -17,8 +17,8 @@
     "build:mac": "electron-builder build --mac"
   },
   "build": {
-    "appId": "com.devtography.electron_boilerplate",
-    "productName": "Electron+React+TypeScript Boilerplate",
+    "appId": "bidi1",
+    "productName": "Group Sitting Offline Registration Form",
     "directories": {
       "app": "./dist/",
       "output": "./out/"
@@ -26,7 +26,7 @@
     "mac": {
       "target": {
         "target": "dmg",
-        "arch": "universal"
+        "arch": "x64"
       }
     },
     "win": {
