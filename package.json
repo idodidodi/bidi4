@@ -1,5 +1,5 @@
 {
-  "name": "offline registration form",
+  "name": "offline_registration_form",
   "version": "1.0.0",
   "description": "for advas studio",
   "main": "./dist/main.bundle.js",
@@ -48,11 +48,11 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "2.3.1",
-    "csv-writer": "^1.6.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "csv-writer": "^1.6.0"
   },
   "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
