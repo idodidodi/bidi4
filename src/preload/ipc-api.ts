@@ -7,7 +7,7 @@ function rendererReady() {
   ipcRenderer.send('renderer-ready');
 }
 
-function exportToCSV(data: RegForm) {
-  ipcRenderer.sendSync('exportToCsv', data);
+async function exportToCSV(data: RegForm):Promise<any> {
+  ipcRenderer.invoke('exportToCsv', data);
 }
 export default { rendererReady, exportToCSV };

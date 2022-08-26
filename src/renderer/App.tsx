@@ -37,26 +37,26 @@ const MyInput: React.FC<{
 }> = ({
   title, className, onChange, placeHolder, description, checkBoxProps,
 }) => (
-  <div className={className}>
-    <div className="title-desc">
+    <div className={className}>
+      <div className="title-desc">
 
-      <div className="title">{title}</div>
-      <div className="desc">{description || ''}</div>
+        <div className="title">{title}</div>
+        <div className="desc">{description || ''}</div>
+      </div>
+      {!checkBoxProps
+        ? (
+          <div className="answer">
+            <input
+              onChange={onChange}
+              placeholder={placeHolder || ''}
+              type="string"
+            />
+          </div>
+        )
+
+        : <div className="answer"><input onChange={onChange} type="checkbox" checked={checkBoxProps?.isChecked} /></div>}
     </div>
-    {!checkBoxProps
-      ? (
-        <div className="answer">
-          <input
-            onChange={onChange}
-            placeholder={placeHolder || ''}
-            type="string"
-          />
-        </div>
-      )
-
-      : <div className="answer"><input onChange={onChange} type="checkbox" checked={checkBoxProps?.isChecked} /></div>}
-  </div>
-);
+  );
 
 function getTime(): string {
   const date = new Date();
@@ -72,8 +72,12 @@ function getDate(): string {
 }
 
 const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
+  React.useEffect(() => {
+    resetForm();
+  }, [])
+
   function resetForm(): void {
-    formRef.current = FORM_INITIAL_VALUE;
+    formRef.current = { ...FORM_INITIAL_VALUE };
   }
 
   const handleName = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -98,10 +102,8 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
     setIsHost(!isHost);
   };
 
-  const exportfromMain = () => {
-    window.ipcAPI?.exportToCSV(formRef.current);
-    // window.electronAPI.exportToCSV(formRef.current);
-    // ipcRenderer.sendSync("exportToCsv", formRef.current)
+  const exportfromMain = async (): Promise<void> => {
+    await window.ipcAPI?.exportToCSV(formRef.current);
   };
   const [formLang, setFormLang] = React.useState<Lang>('Hebrew');
 
@@ -117,13 +119,13 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
   const emailTitleEng = 'Email Address - not required, please fill if changed';
   const formRef = React.useRef<RegForm>(FORM_INITIAL_VALUE);
 
-  const submit = (): void => {
+  const submit = async (): Promise<void> => {
     formRef.current.date = getDate();
     formRef.current.time = getTime();
     if (isHost) {
       formRef.current.host = true;
     }
-    exportfromMain();
+    await exportfromMain();
   };
 
   const validate = (): boolean => formRef.current.name.length > 0;
@@ -146,8 +148,6 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
         </button>
       </div>
       <div className="header">
-        {/* <div className="date">{today}</div> */}
-
         {isHeb()
           ? <span className="welcome-heb">רישום לישיבה קבוצתית</span>
 
@@ -189,11 +189,10 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
       <div className="submit">
         <button
           className="submit-btn"
-          onClick={() => {
+          onClick={async () => {
             if (validate()) {
-              submit();
+              await submit();
               onChange();
-              resetForm();
             } else {
               alert('Name field cannot be empty');
             }
@@ -209,21 +208,20 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
 
 const ThankYouView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
   React.useEffect(() => {
-    setTimeout(onChange, 3000);
+    setTimeout(onChange, 2500);
   }, [onChange]);
 
   return (
-    <>
+    <div className='thankyou-view'>
       <div className="thank-you">
         <div>Thank you for joining the Group Sitting</div>
         <br />
-        <div>The screen will switch to the main screen in a few seconds</div>
       </div>
       <div className="start-again">
         <br />
         <button onClick={onChange}>Register Again</button>
       </div>
-    </>
+    </div>
   );
 };
 

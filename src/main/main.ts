@@ -57,8 +57,9 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-ipcMain.on('exportToCsv', (_, data: RegForm) => {
-  writeToCSV(data);
+ipcMain.handle('exportToCsv', async(_, data: RegForm) => {
+  const res = await writeToCSV(data);
+  return res;
 });
 
 // In this file you can include the rest of your app"s specific main process
