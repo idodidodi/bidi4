@@ -74,10 +74,7 @@ function getSlash(): string {
 }
 
 function getFileName(): string {
-  const LOCATION = `csv${getSlash()}`;
-
-  const fileName = `${GS_REGISTRATION_FILE_PREFIX}_${Date.now().toString()}`;
-  return `${LOCATION}${fileName}`;
+  return `${GS_REGISTRATION_FILE_PREFIX}_${Date.now().toString()}`;
 }
 
 const csvDir = 'csv';
@@ -107,7 +104,7 @@ function createCsvWrite(path: string): void {
 
 function getLogDirectory(dir: string) {
   initDirectory(dir);
-  return `${dir}/`;
+  return `${dir}${getSlash()}`;
 }
 
 function writeLog(data: string) {
@@ -118,15 +115,22 @@ function writeLog(data: string) {
   );
 }
 
-export function writeToCSV(list: RegForm) {
+export async function writeToCSV(list: RegForm):Promise<void> {
   if (!csvWriter) {
     const hd:string = os.homedir();
-    initDirectory(join(hd, csvDir));
-    initDirectory(csvDir);
-    createCsvWrite(getFileName());
+    const exportPath = join(hd, csvDir);
+    const targetExists:boolean = fs.existsSync(exportPath);
+    if (!targetExists) {
+      try {
+        initDirectory(exportPath);
+      } catch (error) {
+        console.log("could not create the folder ", error);
+      }
+    }
+    createCsvWrite(join(exportPath, getFileName()));
   }
-
-  csvWriter
+  try {
+    await csvWriter
     .writeRecords([list])
     .then(() => {
       // eslint-disable-next-line no-console
@@ -138,6 +142,9 @@ export function writeToCSV(list: RegForm) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       writeLog(err);
       // eslint-disable-next-line no-alert
-      alert('Oops, something went wrong, please notify Ido Ayal 0507407368');
     });
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
