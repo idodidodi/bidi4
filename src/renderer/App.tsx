@@ -13,7 +13,7 @@ import * as React from 'react';
 
 import { RegForm } from '../models';
 
-type Lang = 'Hebrew' | 'English';
+type Lang = 'עברית' | 'English';
 
 const FORM_INITIAL_VALUE: RegForm = {
   name: '',
@@ -105,9 +105,9 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
   const exportfromMain = async (): Promise<void> => {
     await window.ipcAPI?.exportToCSV(formRef.current);
   };
-  const [formLang, setFormLang] = React.useState<Lang>('Hebrew');
+  const [formLang, setFormLang] = React.useState<Lang>('עברית');
 
-  const isHeb = (): boolean => (formLang === 'Hebrew');
+  const isHeb = (): boolean => (formLang === 'עברית');
   const yearTitleHeb = 'שנה';
   const yearDescHeb = 'השנה בה השתתפת לאחרונה בקורס ויפאסנה כפי שמלמד ס.נ. גואנקה, אם לא השתתפת בקורס, אנא צור/צרי קשר עם המארח/ת לפני תחילת הישיבה';
   const yearTitleEng = 'Year of last Vipassana course as taught by S.N. Goenka, If you have not participated in a course, please contact the host before the sitting';
@@ -134,7 +134,7 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
     setFormLang(getNextLang());
   };
 
-  const getNextLang = (): Lang => (isHeb() ? 'English' : 'Hebrew');
+  const getNextLang = (): Lang => (isHeb() ? 'English' : 'עברית');
 
   const hebPlaceHolder = 'הקלד.י את תשובתך';
   const [isHost, setIsHost] = React.useState<boolean>(false);
@@ -144,7 +144,7 @@ const FormView: React.FC<{ onChange: () => void }> = ({ onChange }) => {
         <button
           onClick={switchLang}
         >
-          {`Switch to ${getNextLang()}`}
+          {getNextLang()}
         </button>
       </div>
       <div className="header">
